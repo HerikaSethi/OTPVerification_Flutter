@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:live_easy_assignment/LanguageDropdown.dart';
+import 'package:live_easy_assignment/MobileNumber.dart';
 
 class SelectLanguageScreen extends StatelessWidget {
   const SelectLanguageScreen({super.key, required String title});
@@ -49,13 +52,15 @@ class SelectLanguageScreen extends StatelessWidget {
                   // Update the app's language or perform other actions as needed
                 },
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 72, vertical: 24.25),
+             Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 72, vertical: 24.25),
                 child: FractionallySizedBox(
                   widthFactor: 1.0,
                   child: ElevatedButton(
-                      onPressed: (null),
-                      style: ButtonStyle(
+                      onPressed: () {
+                         onClickNext(context);
+                      },
+                      style: const ButtonStyle(
                         minimumSize:
                             MaterialStatePropertyAll(Size(double.infinity, 48)),
                         backgroundColor:
@@ -65,7 +70,7 @@ class SelectLanguageScreen extends StatelessWidget {
                               borderRadius: BorderRadius.zero),
                         ),
                       ),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.all(18.0),
                         child: Text(
                           "NEXT",
@@ -84,26 +89,28 @@ class SelectLanguageScreen extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.bottomCenter,
                       children: [
-                        // First overlapping image
-                        FittedBox(
-                          fit: BoxFit.cover,
-                          child: Positioned(
-                            bottom: 0,
-                            child: Image.asset(
-                                'assets/images/ic_transparent_blue_overlap.png'),
-                          ),
+                         Positioned(
+                          bottom: 0,
+                          child: Image.asset(
+                              'assets/images/ic_dark_blue.png',
+                               width: MediaQuery.of(context).size.width),
                         ),
-                        // Second overlapping image
-                        FittedBox(
-                          fit: BoxFit.contain,
-                          child: Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: Image.asset(
-                                'assets/images/ic_light_blue_overlap.png'),
-                          ),
-                        ),
+                         // First overlapping image
+                        // Positioned(
+                        //   bottom: 0,
+                        //   child: Image.asset(
+                        //       'assets/images/ic_transparent_blue_overlap.png',
+                        //        width: MediaQuery.of(context).size.width),
+                        // ),
+                        // // Second overlapping image
+                        // Positioned(
+                        //   bottom: 0,
+                        //   left: 0,
+                        //   right: 0,
+                        //   child: Image.asset(
+                        //       'assets/images/ic_light_blue_overlap.png',
+                        //        width: MediaQuery.of(context).size.width),      
+                        // ),
                       ],
                     ),
                   ),
@@ -114,5 +121,9 @@ class SelectLanguageScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  void onClickNext(BuildContext context) {
+    Navigator.push(context ,MaterialPageRoute(builder: (context) => const MobileNumberScreen()));
   }
 }
