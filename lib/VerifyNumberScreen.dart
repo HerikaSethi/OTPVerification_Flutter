@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 
 class VerifyNumberScreen extends StatelessWidget {
   final String mobileNumber;
@@ -7,6 +8,54 @@ class VerifyNumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Pinput
+
+    //outer square box outline - not selected
+    final defaultPinTheme = PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xFF93D2F3)),
+        borderRadius: BorderRadius.circular(0),
+      ),
+    );
+    
+    //outer square box outline - selected
+    // final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+    //   border: Border.all(color:  Color(0xFF93D2F3)),
+    //   borderRadius: BorderRadius.circular(0),
+    // );
+
+ final focusedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: Color(0xFF93D2F3),
+      ),
+    );
+    
+    //box inside color
+    final submittedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: Color(0xFF93D2F3),
+      ),
+    );
+    
+   final followingPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: Color(0xFF93D2F3),
+      ),
+    );
+
+    final errorPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: Color(0xFF93D2F3),
+      ),
+    );
+
+    
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -28,12 +77,12 @@ class VerifyNumberScreen extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     text: 'Code is sent to $mobileNumber',
-                    style: const TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                    style:
+                        const TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
                   ),
                   textAlign: TextAlign.center,
                 ),
-               
-                
+
                 // Padding(
                 //   padding: const EdgeInsets.only(left: 16, right: 16, top: 32, bottom: 24),
                 //   child: IntlPhoneField(
@@ -52,15 +101,36 @@ class VerifyNumberScreen extends StatelessWidget {
                 //   ),
                 // ),
 
-                   const Text.rich(
+                Padding(
+                  padding: EdgeInsets.only(left: 11, right: 19, top: 24, bottom: 16),
+                  child: Pinput(
+                    defaultPinTheme: defaultPinTheme,
+                    focusedPinTheme: focusedPinTheme,
+                    submittedPinTheme: submittedPinTheme,
+                    followingPinTheme: followingPinTheme,
+                    errorPinTheme: errorPinTheme,
+                    length: 6,
+                
+                    validator: (s) {
+                      return s == '222277' ? null : 'Pin is incorrect';
+                    },
+                    pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                    showCursor: true,
+                    onCompleted: (pin) => print(pin),
+                  ),
+                ),
+
+                const Text.rich(
                   TextSpan(
                     text: 'Didnot receive the code?',
                     style: TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
                     children: <TextSpan>[
                       TextSpan(
                         text: ' Request Again',
-                        style:
-                            TextStyle(fontSize: 14, color: Color(0xff6a6c7b), fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xff6a6c7b),
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

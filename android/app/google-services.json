@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "333863710852",
+    "project_id": "flutterotpverification-e2538",
+    "storage_bucket": "flutterotpverification-e2538.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333863710852:android:2cb9835dda6a0938d3d2d1",
+        "android_client_info": {
+          "package_name": "com.example.live_easy_assignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn2bsYGOg8F0d-QshDxtlWUG4pfkXcJDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
