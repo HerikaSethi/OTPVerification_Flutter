@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:live_easy_assignment/VerifyNumberScreen.dart';
@@ -11,6 +12,7 @@ class MobileNumberScreen extends StatefulWidget {
 
 class _MobileNumberScreenState extends State<MobileNumberScreen> {
   String mobileNum = '';
+  String completeNum = '';
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +64,28 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                     onChanged: (phone) {
                       print(phone.completeNumber);
                       mobileNum = phone.number;
+                      completeNum = phone.completeNumber;
                     },
                   ),
                 ),
                 Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 24.25),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 24.25),
                   child: FractionallySizedBox(
                     widthFactor: 1.0,
                     child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                            phoneNumber: completeNum,
+                            verificationCompleted:
+                                (PhoneAuthCredential credential) {},
+                            verificationFailed: (FirebaseAuthException e) {},
+                            codeSent:
+                                (String verificationId, int? resendToken) {},
+                            codeAutoRetrievalTimeout:
+                                (String verificationId) {},
+                          );
+                          //navigate to next screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
