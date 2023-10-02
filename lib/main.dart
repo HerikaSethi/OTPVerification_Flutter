@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Live Easy App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.blueColor),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.activeButtonBlue),
         useMaterial3: true,
       ),
       home: const SelectLanguageScreen(title: ' '),  

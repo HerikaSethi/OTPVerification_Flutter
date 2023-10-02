@@ -57,117 +57,122 @@ class VerifyNumberScreen extends StatelessWidget {
 
     var mySMSCode = '';
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 80),
-                const Text(
-                  "Verify Phone",
-                  style: TextStyle(
-                      color: AppColor.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 11.23),
-                Text.rich(
-                  TextSpan(
-                    text: 'Code is sent to $mobileNumber',
-                    style:
-                        const TextStyle(fontSize: 14, color: AppColor.lightgrey),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 80),
+                  const Text(
+                    "Verify Phone",
+                    style: TextStyle(
+                        color: AppColor.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 11, right: 19, top: 24, bottom: 16),
-                  child: Pinput(
-                    defaultPinTheme: defaultPinTheme,
-                    focusedPinTheme: focusedPinTheme,
-                    submittedPinTheme: submittedPinTheme,
-                    followingPinTheme: followingPinTheme,
-                    errorPinTheme: errorPinTheme,
-                    length: 6,
-                    onChanged: (value) {
-                      mySMSCode = value;
-                    },
-                    // validator: (s) {
-                    //   return s == '222277' ? null : 'Pin is incorrect';
-                    // },
-                    pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                    showCursor: true,
-                    onCompleted: (pin) => print(pin),
+                  const SizedBox(height: 11.23),
+                  Text.rich(
+                    TextSpan(
+                      text: 'Code is sent to $mobileNumber',
+                      style: const TextStyle(
+                          fontSize: 14, color: AppColor.lightgrey),
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                const Text.rich(
-                  TextSpan(
-                    text: 'Didnot receive the code?',
-                    style: TextStyle(fontSize: 14, color: AppColor.lightgrey),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '\tRequest Again',
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: AppColor.lightgrey,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 11, right: 19, top: 24, bottom: 16),
+                    child: Pinput(
+                      defaultPinTheme: defaultPinTheme,
+                      focusedPinTheme: focusedPinTheme,
+                      submittedPinTheme: submittedPinTheme,
+                      followingPinTheme: followingPinTheme,
+                      errorPinTheme: errorPinTheme,
+                      length: 6,
+                      onChanged: (value) {
+                        mySMSCode = value;
+                      },
+                      // validator: (s) {
+                      //   return s == '222277' ? null : 'Pin is incorrect';
+                      // },
+                      pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                      showCursor: true,
+                      onCompleted: (pin) => print(pin),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 24.25),
-                  child: FractionallySizedBox(
-                    widthFactor: 1.0,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          try {
-                            // Create a PhoneAuthCredential with the code
-                            PhoneAuthCredential credential =
-                                PhoneAuthProvider.credential(
-                                    verificationId: verifyId,
-                                    smsCode: mySMSCode);
-
-                            // Sign the user in (or link) with the credential
-                            await auth.signInWithCredential(credential);
-
-                            // ignore: use_build_context_synchronously
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SelectProfileScreen(),
-                              ),
-                            );
-                          } catch (e) {
-                            print("Wrong otp");
-                          }
-                        },
-                        style: const ButtonStyle(
-                          minimumSize: MaterialStatePropertyAll(
-                              Size(double.infinity, 48)),
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColor.activeButtonBlue),
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.zero),
-                          ),
+                  const Text.rich(
+                    TextSpan(
+                      text: 'Didnot receive the code?',
+                      style: TextStyle(fontSize: 14, color: AppColor.lightgrey),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '\tRequest Again',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: AppColor.lightgrey,
+                              fontWeight: FontWeight.bold),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(18.0),
-                          child: Text(
-                            "VERIFY AND CONTINUE",
-                            style: TextStyle(color: AppColor.white, fontSize: 18),
-                          ),
-                        )),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 24.25),
+                    child: FractionallySizedBox(
+                      widthFactor: 1.0,
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            try {
+                              // Create a PhoneAuthCredential with the code
+                              PhoneAuthCredential credential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: verifyId,
+                                      smsCode: mySMSCode);
+
+                              // Sign the user in (or link) with the credential
+                              await auth.signInWithCredential(credential);
+
+                              // Navigating to the next screen and clear the previous stack
+                              // ignore: use_build_context_synchronously
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SelectProfileScreen(), 
+                                ),
+                              );
+                            } catch (e) {
+                              print("Wrong otp");
+                            }
+                          },
+                          style: const ButtonStyle(
+                            minimumSize: MaterialStatePropertyAll(
+                                Size(double.infinity, 48)),
+                            backgroundColor: MaterialStatePropertyAll(
+                                AppColor.activeButtonBlue),
+                            shape: MaterialStatePropertyAll(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
+                            ),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(18.0),
+                            child: Text(
+                              "VERIFY AND CONTINUE",
+                              style: TextStyle(
+                                  color: AppColor.white, fontSize: 18),
+                            ),
+                          )),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
