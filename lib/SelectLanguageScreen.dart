@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:live_easy_assignment/LanguageDropdown.dart';
 import 'package:live_easy_assignment/MobileNumber.dart';
+import 'package:live_easy_assignment/constants/AppColor.dart';
 
 class SelectLanguageScreen extends StatelessWidget {
   const SelectLanguageScreen({super.key, required String title});
@@ -10,9 +11,7 @@ class SelectLanguageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(" "),
-      ),
+      appBar: AppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),
@@ -25,7 +24,7 @@ class SelectLanguageScreen extends StatelessWidget {
               const Text(
                 "Please select your Language",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: AppColor.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
@@ -33,11 +32,11 @@ class SelectLanguageScreen extends StatelessWidget {
               const Text.rich(
                 TextSpan(
                   text: 'You can change the language\n',
-                  style: TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                  style: TextStyle(fontSize: 14, color: AppColor.lightgrey),
                   children: <TextSpan>[
                     TextSpan(
                       text: 'at any time',
-                      style: TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                      style: TextStyle(fontSize: 14, color: AppColor.lightgrey),
                     ),
                   ],
                 ),
@@ -64,7 +63,7 @@ class SelectLanguageScreen extends StatelessWidget {
                         minimumSize:
                             MaterialStatePropertyAll(Size(double.infinity, 48)),
                         backgroundColor:
-                            MaterialStatePropertyAll(Color(0xff2E3B62)),
+                            MaterialStatePropertyAll(AppColor.activeButtonBlue),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero),
@@ -74,7 +73,7 @@ class SelectLanguageScreen extends StatelessWidget {
                         padding: EdgeInsets.all(18.0),
                         child: Text(
                           "NEXT",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(color: AppColor.white, fontSize: 18),
                         ),
                       )),
                 ),

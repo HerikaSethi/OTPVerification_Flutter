@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:live_easy_assignment/SelectProfileScreen.dart';
+import 'package:live_easy_assignment/constants/AppColor.dart';
 import 'package:pinput/pinput.dart';
 
 class VerifyNumberScreen extends StatelessWidget {
@@ -24,39 +25,33 @@ class VerifyNumberScreen extends StatelessWidget {
           color: Color.fromRGBO(30, 60, 87, 1),
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xFF93D2F3)),
+        border: Border.all(color: AppColor.pinBlue),
         borderRadius: BorderRadius.circular(0),
       ),
     );
 
-    //outer square box outline - selected
-    // final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-    //   border: Border.all(color:  Color(0xFF93D2F3)),
-    //   borderRadius: BorderRadius.circular(0),
-    // );
-
     final focusedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color(0xFF93D2F3),
+        color: AppColor.pinBlue,
       ),
     );
 
     //box inside color
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color(0xFF93D2F3),
+        color: AppColor.pinBlue,
       ),
     );
 
     final followingPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color(0xFF93D2F3),
+        color: AppColor.pinBlue,
       ),
     );
 
     final errorPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color(0xFF93D2F3),
+        color: AppColor.pinBlue,
       ),
     );
 
@@ -75,7 +70,7 @@ class VerifyNumberScreen extends StatelessWidget {
                 const Text(
                   "Verify Phone",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: AppColor.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -84,29 +79,10 @@ class VerifyNumberScreen extends StatelessWidget {
                   TextSpan(
                     text: 'Code is sent to $mobileNumber',
                     style:
-                        const TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                        const TextStyle(fontSize: 14, color: AppColor.lightgrey),
                   ),
                   textAlign: TextAlign.center,
                 ),
-
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 16, right: 16, top: 32, bottom: 24),
-                //   child: IntlPhoneField(
-                //     showDropdownIcon: false,
-                //     disableLengthCheck: true,
-                //     decoration: const InputDecoration(
-                //       labelText: '\t-\t\tMobile Number',
-                //       border: OutlineInputBorder(
-                //         borderSide: BorderSide(),
-                //       ),
-                //     ),
-                //     initialCountryCode: 'IN',
-                //     onChanged: (phone) {
-                //       print(phone.completeNumber);
-                //     },
-                //   ),
-                // ),
-
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 11, right: 19, top: 24, bottom: 16),
@@ -128,17 +104,16 @@ class VerifyNumberScreen extends StatelessWidget {
                     onCompleted: (pin) => print(pin),
                   ),
                 ),
-
                 const Text.rich(
                   TextSpan(
                     text: 'Didnot receive the code?',
-                    style: TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                    style: TextStyle(fontSize: 14, color: AppColor.lightgrey),
                     children: <TextSpan>[
                       TextSpan(
                         text: '\tRequest Again',
                         style: TextStyle(
                             fontSize: 14,
-                            color: Color(0xff6a6c7b),
+                            color: AppColor.lightgrey,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -146,48 +121,48 @@ class VerifyNumberScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24.25),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 24.25),
                   child: FractionallySizedBox(
                     widthFactor: 1.0,
                     child: ElevatedButton(
                         onPressed: () async {
-                          try{
-                             // Create a PhoneAuthCredential with the code
-                          PhoneAuthCredential credential =
-                              PhoneAuthProvider.credential(
-                                  verificationId: verifyId, smsCode: mySMSCode);
-                          
-                          // Sign the user in (or link) with the credential
-                          await auth.signInWithCredential(credential);
-                           
-                           // ignore: use_build_context_synchronously
-                           Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SelectProfileScreen(),
-                                ),
-                              );
-                          }catch(e){
-                              print("wrong otp");
+                          try {
+                            // Create a PhoneAuthCredential with the code
+                            PhoneAuthCredential credential =
+                                PhoneAuthProvider.credential(
+                                    verificationId: verifyId,
+                                    smsCode: mySMSCode);
+
+                            // Sign the user in (or link) with the credential
+                            await auth.signInWithCredential(credential);
+
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SelectProfileScreen(),
+                              ),
+                            );
+                          } catch (e) {
+                            print("Wrong otp");
                           }
-                         
                         },
-                        style: ButtonStyle(
+                        style: const ButtonStyle(
                           minimumSize: MaterialStatePropertyAll(
                               Size(double.infinity, 48)),
                           backgroundColor:
-                              MaterialStatePropertyAll(Color(0xff2E3B62)),
+                              MaterialStatePropertyAll(AppColor.activeButtonBlue),
                           shape: MaterialStatePropertyAll(
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.zero),
                           ),
                         ),
-                        child: Padding(
+                        child: const Padding(
                           padding: EdgeInsets.all(18.0),
                           child: Text(
                             "VERIFY AND CONTINUE",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(color: AppColor.white, fontSize: 18),
                           ),
                         )),
                   ),

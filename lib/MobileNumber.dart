@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:live_easy_assignment/VerifyNumberScreen.dart';
+import 'package:live_easy_assignment/constants/AppColor.dart';
 
 class MobileNumberScreen extends StatefulWidget {
   const MobileNumberScreen({super.key});
@@ -31,7 +32,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                 const Text(
                   "Please enter your mobile number",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: AppColor.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -39,12 +40,12 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                 const Text.rich(
                   TextSpan(
                     text: 'You’ll receive a 4 digit code\n',
-                    style: TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                    style: TextStyle(fontSize: 14, color: AppColor.lightgrey),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'to verify next.',
                         style:
-                            TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
+                            TextStyle(fontSize: 14, color: AppColor.lightgrey),
                       ),
                     ],
                   ),
@@ -100,7 +101,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                           minimumSize: MaterialStatePropertyAll(
                               Size(double.infinity, 48)),
                           backgroundColor:
-                              MaterialStatePropertyAll(Color(0xff2E3B62)),
+                              MaterialStatePropertyAll(AppColor.activeButtonBlue),
                           shape: MaterialStatePropertyAll(
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.zero),
@@ -110,7 +111,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                           padding: EdgeInsets.all(18.0),
                           child: Text(
                             "CONTINUE",
-                            style: TextStyle(color: Colors.white, fontSize: 16,letterSpacing: 0.48, fontWeight: FontWeight.w700),
+                            style: TextStyle(color: AppColor.white, fontSize: 16,letterSpacing: 0.48, fontWeight: FontWeight.w700),
                           ),
                         )),
                   ),

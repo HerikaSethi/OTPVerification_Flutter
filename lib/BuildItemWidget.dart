@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_easy_assignment/constants/AppColor.dart';
 
 class BuildItem extends StatelessWidget {
   final int value;
@@ -24,7 +25,7 @@ class BuildItem extends StatelessWidget {
       margin: const EdgeInsets.only(left: 16,right: 16),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
+        border: Border.all(color: AppColor.black),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +35,7 @@ class BuildItem extends StatelessWidget {
             child: Radio(
               value: value,
               groupValue: selectedRadio,
-              activeColor: Color(0xFF2E3B62),
+              activeColor: AppColor.activeButtonBlue,
               onChanged: (val) {
                 setSelectedRadio(val??1);
               },
@@ -60,7 +61,7 @@ class BuildItem extends StatelessWidget {
                 description,
                 style: const TextStyle(fontSize: 12.0,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xff6a6c7b)),
+                  color: AppColor.lightgrey),
               ),
             ],
           ),

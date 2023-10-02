@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_easy_assignment/constants/AppColor.dart';
 
 class LanguageDropdown extends StatefulWidget {
   final ValueChanged<String> onLanguageChanged; 
@@ -24,7 +25,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.black, // Border color
+            color: AppColor.black, // Border color
             width: 1.0, // Border width
           ),
           borderRadius: BorderRadius.circular(4.0),

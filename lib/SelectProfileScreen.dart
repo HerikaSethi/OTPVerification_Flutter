@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:live_easy_assignment/BuildItemWidget.dart';
+import 'package:live_easy_assignment/constants/AppColor.dart';
 
 class SelectProfileScreen extends StatefulWidget {
   const SelectProfileScreen({super.key});
@@ -31,7 +32,7 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
               const Text(
                 "Please select your profile",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: AppColor.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
@@ -73,7 +74,7 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
                         minimumSize:
                             MaterialStatePropertyAll(Size(double.infinity, 48)),
                         backgroundColor:
-                            MaterialStatePropertyAll(Color(0xff2E3B62)),
+                            MaterialStatePropertyAll(AppColor.activeButtonBlue),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero),
@@ -83,7 +84,7 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
                         padding: EdgeInsets.all(18.0),
                         child: Text(
                           "CONTINUE",
-                          style: TextStyle(color: Colors.white, fontSize: 16,letterSpacing: 0.48,fontWeight: FontWeight.w700),
+                          style: TextStyle(color: AppColor.white, fontSize: 16,letterSpacing: 0.48,fontWeight: FontWeight.w700),
                         ),
                       )),
                 ),
