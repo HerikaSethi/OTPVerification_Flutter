@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:live_easy_assignment/SelectProfileScreen.dart';
 import 'package:pinput/pinput.dart';
 
 class VerifyNumberScreen extends StatelessWidget {
   final String mobileNumber;
+  final String verifyId;
 
-  const VerifyNumberScreen({super.key, required this.mobileNumber});
+  VerifyNumberScreen(
+      {super.key, required this.mobileNumber, required this.verifyId});
 
+  final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     // Pinput
@@ -14,7 +19,7 @@ class VerifyNumberScreen extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
           fontSize: 20,
           color: Color.fromRGBO(30, 60, 87, 1),
           fontWeight: FontWeight.w600),
@@ -23,27 +28,27 @@ class VerifyNumberScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(0),
       ),
     );
-    
+
     //outer square box outline - selected
     // final focusedPinTheme = defaultPinTheme.copyDecorationWith(
     //   border: Border.all(color:  Color(0xFF93D2F3)),
     //   borderRadius: BorderRadius.circular(0),
     // );
 
- final focusedPinTheme = defaultPinTheme.copyWith(
+    final focusedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
         color: Color(0xFF93D2F3),
       ),
     );
-    
+
     //box inside color
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
         color: Color(0xFF93D2F3),
       ),
     );
-    
-   final followingPinTheme = defaultPinTheme.copyWith(
+
+    final followingPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
         color: Color(0xFF93D2F3),
       ),
@@ -55,7 +60,8 @@ class VerifyNumberScreen extends StatelessWidget {
       ),
     );
 
-    
+    var mySMSCode = '';
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -102,7 +108,8 @@ class VerifyNumberScreen extends StatelessWidget {
                 // ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 11, right: 19, top: 24, bottom: 16),
+                  padding: const EdgeInsets.only(
+                      left: 11, right: 19, top: 24, bottom: 16),
                   child: Pinput(
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: focusedPinTheme,
@@ -110,10 +117,12 @@ class VerifyNumberScreen extends StatelessWidget {
                     followingPinTheme: followingPinTheme,
                     errorPinTheme: errorPinTheme,
                     length: 6,
-                
-                    validator: (s) {
-                      return s == '222277' ? null : 'Pin is incorrect';
+                    onChanged: (value) {
+                      mySMSCode = value;
                     },
+                    // validator: (s) {
+                    //   return s == '222277' ? null : 'Pin is incorrect';
+                    // },
                     pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                     showCursor: true,
                     onCompleted: (pin) => print(pin),
@@ -126,7 +135,7 @@ class VerifyNumberScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 14, color: Color(0xff6a6c7b)),
                     children: <TextSpan>[
                       TextSpan(
-                        text: ' Request Again',
+                        text: '\tRequest Again',
                         style: TextStyle(
                             fontSize: 14,
                             color: Color(0xff6a6c7b),
@@ -136,13 +145,34 @@ class VerifyNumberScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const Padding(
+                Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 24.25),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24.25),
                   child: FractionallySizedBox(
                     widthFactor: 1.0,
                     child: ElevatedButton(
-                        onPressed: (null),
+                        onPressed: () async {
+                          try{
+                             // Create a PhoneAuthCredential with the code
+                          PhoneAuthCredential credential =
+                              PhoneAuthProvider.credential(
+                                  verificationId: verifyId, smsCode: mySMSCode);
+                          
+                          // Sign the user in (or link) with the credential
+                          await auth.signInWithCredential(credential);
+                           
+                           // ignore: use_build_context_synchronously
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SelectProfileScreen(),
+                                ),
+                              );
+                          }catch(e){
+                              print("wrong otp");
+                          }
+                         
+                        },
                         style: ButtonStyle(
                           minimumSize: MaterialStatePropertyAll(
                               Size(double.infinity, 48)),

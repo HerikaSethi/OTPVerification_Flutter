@@ -5,7 +5,7 @@ import 'package:live_easy_assignment/VerifyNumberScreen.dart';
 
 class MobileNumberScreen extends StatefulWidget {
   const MobileNumberScreen({super.key});
-
+  
   @override
   State<MobileNumberScreen> createState() => _MobileNumberScreenState();
 }
@@ -13,7 +13,9 @@ class MobileNumberScreen extends StatefulWidget {
 class _MobileNumberScreenState extends State<MobileNumberScreen> {
   String mobileNum = '';
   String completeNum = '';
-
+  String verificationId = '';
+  String smsCode = '';
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -81,17 +83,17 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                 (PhoneAuthCredential credential) {},
                             verificationFailed: (FirebaseAuthException e) {},
                             codeSent:
-                                (String verificationId, int? resendToken) {},
+                                (String verificationId, int? resendToken) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VerifyNumberScreen(
+                                      mobileNumber: mobileNum, verifyId : verificationId),
+                                ),
+                              );
+                            },
                             codeAutoRetrievalTimeout:
                                 (String verificationId) {},
-                          );
-                          //navigate to next screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  VerifyNumberScreen(mobileNumber: mobileNum),
-                            ),
                           );
                         },
                         style: const ButtonStyle(
@@ -108,7 +110,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                           padding: EdgeInsets.all(18.0),
                           child: Text(
                             "CONTINUE",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(color: Colors.white, fontSize: 16,letterSpacing: 0.48, fontWeight: FontWeight.w700),
                           ),
                         )),
                   ),
