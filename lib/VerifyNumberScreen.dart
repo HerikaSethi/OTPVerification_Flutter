@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:live_easy_assignment/SelectProfileScreen.dart';
 import 'package:live_easy_assignment/constants/AppColor.dart';
 import 'package:pinput/pinput.dart';
@@ -97,9 +98,6 @@ class VerifyNumberScreen extends StatelessWidget {
                       onChanged: (value) {
                         mySMSCode = value;
                       },
-                      // validator: (s) {
-                      //   return s == '222277' ? null : 'Pin is incorrect';
-                      // },
                       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                       showCursor: true,
                       onCompleted: (pin) => print(pin),
@@ -148,7 +146,8 @@ class VerifyNumberScreen extends StatelessWidget {
                                 ),
                               );
                             } catch (e) {
-                              print("Wrong otp");
+                               Fluttertoast.showToast(
+                                  msg: "Invalid OTP");
                             }
                           },
                           style: const ButtonStyle(
