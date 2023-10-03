@@ -5,7 +5,7 @@ A new Flutter Project which shows the implementation of Phone Authentication fro
 # Testing Mobile Number : 
   +91 1234567891
 # Testing OTP : 
-  1234
+  123456
 
 # Screenshots
 <img src="https://github.com/HerikaSethi/OTPVerification_Flutter/assets/43989738/00dd7f6b-67f9-4a6a-bba7-c8d20eeed772" alt="Image 1" width="200" height="350">
